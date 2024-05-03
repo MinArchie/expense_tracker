@@ -10,7 +10,11 @@
  <div class="alert">{{message}}</div>
 {% endfor %}
 
-<div class="container">
+<br>
+<br>
+<br>
+<center>
+<div class="container__form">
 	<form action="/login" method ="POST">
 		<div class="form-group">
 			<h1 class="h3 mb-3 font-weight-normal"> Please Sign in </h1>
@@ -21,8 +25,11 @@
 		<div class="form-group">
 			<input type="password" name="password" class="form-control" placeholder="Password" required>
 		</div>
-		<button class="btn btn-primary btn-block" type="submit">Log in</button>
+		<button class="container__form btn" type="submit">Log in</button>
 	</form>
 <div>
+
+
+</center>
 
 {% endblock %}

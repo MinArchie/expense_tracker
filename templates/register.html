@@ -1,4 +1,6 @@
+<center>
 {% extends "layout.html" %}
+
 
 {% block title %}
 	Register
@@ -10,7 +12,10 @@
  <div class="alert">{{message}}</div>
 {% endfor %}
 
-<div class="container">
+<br>
+<br>
+<br>
+<div class="container__form">
 	<form action = "/register" method="POST">
 		<div class="form-group">
 			<h1 class="h3 mb-3 font-weight-normal"> Fill the details </h1>
@@ -28,8 +33,11 @@
 			<input type="password" id="confirm-password" name="confirmPassword" class="form-control" placeholder="Confirm Password" required>
 		</div>
 
-		<button class="btn btn-primary btn-block" type="submit">Register</button>
+		<button class="container__form btn" type="submit">Register</button>
 
 	</form>
 </div>
+
+</div>
 {% endblock %}
+</center>

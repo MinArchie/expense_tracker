@@ -22,7 +22,7 @@ Session(app)
 
 @app.route('/', methods = ['GET'])
 def index():
-	return render_template("layout.html")
+	return render_template("index.html")
 
 
 @app.route('/credit', methods = ['GET','POST'])
@@ -79,7 +79,7 @@ def login():
 			else:
 				session["user_id"] = rows[0]["id"]
 				return redirect("/")
-	return render_template("login.html")
+	return render_template("login.html", show_forms=True)
 
 
 @app.route('/logout',methods = ['GET','POST'])
@@ -98,7 +98,7 @@ def register():
 			rows = q.sql_select_query(db, sql_query, username = request.form.get("username"))
 			if(len(rows)>0):
 				flash("User already exists")
-				return render_template("register.html")
+				return render_template("register.html", show_forms=True)
 		except:
 			print("rows",rows)
 			pass		
@@ -109,7 +109,7 @@ def register():
 		q.sql_insert_query(db, sql_query, dict(username=request.form.get("username"),password=generate_password_hash(request.form.get("password"))))
 		return redirect("/")
 	else:
-		return render_template("register.html")
+		return render_template("register.html", show_forms=True)
 
 @app.route('/statement', methods = ['GET'])
 @login_required
