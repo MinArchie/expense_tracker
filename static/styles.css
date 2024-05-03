@@ -1,0 +1,51 @@
+/* Custom Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar-brand {
+    font-family: 'Arial';
+    font-size: 28px;
+}
+
+.navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 18px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.hero {
+    text-align: center;
+    padding-top: 100px; /* Adjust spacing from top */
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 36px;
+    font-weight: bold;
+    color: #ff6600; /* Customize color if needed */
+}
+
+.hero-buttons {
+    margin-top: 50px;
+}
+
+.btn-primary {
+    background-color: #ff6600;
+    border-color: #ff6600;
+}
+
+.btn-outline-light {
+    color: #fff;
+    border-color: #fff;
+}
