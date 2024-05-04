@@ -5,15 +5,22 @@
 {% endblock %}
 
 {% block main %}
-
+<br>
+<br>
 {% for message in get_flashed_messages() %}
- <div class="alert">{{message}}</div>
+ <div class="error-container">{{message}}</div>
 {% endfor %}
 
 <br>
 <br>
 <br>
 <center>
+<p>Don't Have An Accoun?</p>
+	<a href="/register">
+		<button class="btn">Register</button>
+	</a>
+<br>
+<br>
 <div class="container__form">
 	<form action="/login" method ="POST">
 		<div class="form-group">

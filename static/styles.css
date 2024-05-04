@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  --primary-color: #f3eae5;
+  --primary-color: #d6ccc7;
   --text-dark: #2c2724;
   --white: #ffffff;
   --max-width: 1200px;
@@ -180,8 +180,20 @@ nav {
   border-radius: 1rem;
   z-index: -1;
 
-  animation: show 0.75s 1.25s ease-in-out forwards;
+  animation: show 0.75s 0.25s ease-in-out forwards;
 }
+
+.error-container {
+    text-align: center;
+    border: 1px solid red;
+    background-color: rgba(253, 187, 187, 0.5); 
+    padding: 10px; 
+    margin: 0 auto;
+    width: 20%;
+    color: rgb(114, 43, 43);
+}
+
+
 
 @keyframes show {
   0% {

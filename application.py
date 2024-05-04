@@ -25,40 +25,55 @@ def index():
 	return render_template("index.html")
 
 
-@app.route('/credit', methods = ['GET','POST'])
-def credit():
-	if request.method == 'POST':
-		user_id = session["user_id"]
-		users_balance = "SELECT balance FROM users where id = :user_id"
-		rows = q.sql_select_query(db, users_balance, dict(user_id=user_id))
-		balance = rows[0][0] + float(request.form.get("amount"))
-		type_of_transaction = "C"
-		sql_query = "INSERT INTO transactions(user_id, reason, type, amount) VALUES (:user_id, :reason,:type, :amount)"
-		variable = dict(user_id=session["user_id"], reason = request.form.get("about"), type = type_of_transaction, amount = request.form.get("amount"))
-		q.sql_insert_query(db, sql_query, variable)
-		sql_query = "UPDATE users SET balance =:balance WHERE id =:user_id"
-		variable = dict(balance = balance, user_id = user_id)
-		q.sql_insert_query(db, sql_query, variable)
-	return redirect("/transaction")
+@app.route('/cash', methods=['GET', 'POST'])
+def cash():
+    if request.method == 'POST':
+        user_id = session["user_id"]
+        amount = float(request.form.get("amount"))
+        reason = request.form.get("reason")
+        
+        if reason == "custom":
+            reason = request.form.get("customReason")
+
+        users_balance = "SELECT balance FROM users WHERE id = :user_id"
+        rows = q.sql_select_query(db, users_balance, dict(user_id=user_id))
+        balance = rows[0][0] + amount
+        type_of_transaction = "C"
+        sql_query = "INSERT INTO transactions(user_id, reason, type, amount) VALUES (:user_id, :reason, :type, :amount)"
+        variable = dict(user_id=session["user_id"], reason=reason, type=type_of_transaction, amount=amount)
+        q.sql_insert_query(db, sql_query, variable)
+        
+        sql_query = "UPDATE users SET balance = :balance WHERE id = :user_id"
+        variable = dict(balance=balance, user_id=user_id)
+        q.sql_insert_query(db, sql_query, variable)
+        
+    return redirect("/transaction")
 
 
-@app.route('/debit', methods = ['GET','POST'])
+
+@app.route('/debit', methods=['GET', 'POST'])
 def debit():
-	if request.method == 'POST':
-		user_id = session["user_id"]
-		amount = float(request.form.get("amount"))
-		users_balance = "SELECT balance FROM users where id = :user_id"
-		rows = q.sql_select_query(db, users_balance, dict(user_id=user_id))
-		balance = rows[0][0]
-		balance -= amount
-		type = "D"
-		sql_query = "INSERT INTO transactions(user_id,reason, type, amount) VALUES (:user_id,:reason,:type, :amount)"
-		variable = dict(user_id=session["user_id"], reason = request.form.get("about"), type = type, amount = amount)
-		q.sql_insert_query(db,sql_query, variable)
-		sql_query = "UPDATE users SET balance =:balance WHERE id =:user_id"
-		variable = dict(balance = balance, user_id = user_id)
-		q.sql_insert_query(db, sql_query, variable)
-	return redirect("/transaction")
+    if request.method == 'POST':
+        user_id = session["user_id"]
+        amount = float(request.form.get("amount"))
+        reason = request.form.get("reason")
+        
+        if reason == "custom":
+            reason = request.form.get("customReason")
+
+        users_balance = "SELECT balance FROM users WHERE id = :user_id"
+        rows = q.sql_select_query(db, users_balance, dict(user_id=user_id))
+        balance = rows[0][0] - amount
+        type_of_transaction = "D"
+        sql_query = "INSERT INTO transactions(user_id, reason, type, amount) VALUES (:user_id, :reason, :type, :amount)"
+        variable = dict(user_id=session["user_id"], reason=reason, type=type_of_transaction, amount=amount)
+        q.sql_insert_query(db, sql_query, variable)
+        
+        sql_query = "UPDATE users SET balance = :balance WHERE id = :user_id"
+        variable = dict(balance=balance, user_id=user_id)
+        q.sql_insert_query(db, sql_query, variable)
+        
+    return redirect("/transaction")
 
 
 @app.route('/login', methods = ['GET','POST'])
@@ -126,7 +141,9 @@ def  statement():
 @app.route('/transaction',methods = ['GET','POST'])
 @login_required
 def transaction():
-	return render_template("transaction.html")
+	pre_existing_reasons = ["Groceries", "Utilities", "Rent", "Entertainment", "Transportation", "Food"]
+
+	return render_template("transaction.html",  reasons=pre_existing_reasons)
 
 if __name__ == '__main__':
 	app.run()

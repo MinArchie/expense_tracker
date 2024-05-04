@@ -3,14 +3,24 @@
     Home
 {% endblock %}
 {% block main %}
+<br>
+<br>
 <div class="container">
     <div class="container__left">
         <h1>Track your Expenses</h1>
-        <div class="container__btn">
-            <a href="/register">
-                <button class="btn">START NOW</button>
-            </a>
-        </div>
+        {% if session.user_id %}
+            <div class="container__btn">
+                <a href="/transaction">
+                    <button class="btn">START TRACKING</button>
+                </a>
+            </div>
+        {% else %}
+            <div class="container__btn">
+                <a href="/register">
+                    <button class="btn">START NOW</button>
+                </a>
+            </div>
+        {% endif %}
     </div>
       <div class="container__right">
         <div class="images">
