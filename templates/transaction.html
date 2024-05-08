@@ -23,7 +23,7 @@
 			<div class="form-group">
 				<input type="number" class="form-control" name="amount" id="amount" placeholder="Amount" required>
 			</div>
-			<button class="btn" type="submit" name="cash" onclick="check(this.name)">Cash</button>
+			<button class="btn" type="submit" name="credit" onclick="check(this.name)">Credit</button>
 			<button class="btn" type="submit" name="debit" onclick="check(this.name)">Debit</button>
 		</form>
 		
@@ -43,8 +43,8 @@
 	
 			if (reason !== "" && amount !== "") {
 				var action;
-				if (clicked === "cash"){
-					action = "/cash";
+				if (clicked === "credit"){
+					action = "/credit";
 				} else {
 					action = "/debit";
 				}
