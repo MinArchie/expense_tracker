@@ -63,7 +63,7 @@ nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    right: 1rem; /* Adjust this value as needed */
+    right: 1rem; 
   }
 
 .nav__links {
