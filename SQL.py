@@ -38,8 +38,6 @@ def main():
 	else:
 		print("Error! Cannot create database connection")
 
-	#conn.execute("INSERT INTO users (uname,password) VALUES ('pujitha','pujitha')")
-	#conn.commit()
 	print("Users")
 	l=conn.execute("SELECT * from users")
 	for row in l:

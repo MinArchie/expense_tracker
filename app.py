@@ -9,7 +9,7 @@ import Queries as q
 
 app = Flask(__name__)
 
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 
 db = q.create_connection("app_database.db")
 
